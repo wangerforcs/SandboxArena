@@ -1,0 +1,30 @@
+{
+  "id": "python-smoke",
+  "version": "1.0.0",
+  "title": "Execute a small deterministic Python workload",
+  "description": "Baseline workload for validating provider adapters and end-to-end timing.",
+  "category": "baseline",
+  "steps": [
+    {
+      "id": "compute",
+      "command": [
+        "python",
+        "-c",
+        "import hashlib; print(hashlib.sha256(('sandbox-arena' * 10000).encode()).hexdigest())"
+      ]
+    },
+    {
+      "id": "verify",
+      "command": [
+        "python",
+        "-c",
+        "assert sum(range(10000)) == 49995000; print('ok')"
+      ]
+    }
+  ],
+  "limits": {
+    "timeout_seconds": 120,
+    "max_output_bytes": 4096
+  }
+}
+

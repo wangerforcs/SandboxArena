@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-02T06:01:31.852687+00:00",
+  "summary": {
+    "result_count": 0,
+    "provider_count": 0,
+    "workload_count": 0,
+    "success_rate": null,
+    "sources": {}
+  },
+  "providers": [],
+  "workloads": [],
+  "records": []
+}

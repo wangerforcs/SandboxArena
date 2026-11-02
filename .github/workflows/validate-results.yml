@@ -1,0 +1,29 @@
+name: Validate benchmark submissions
+
+on:
+  pull_request:
+    paths:
+      - "data/results/**/*.json"
+      - "arena/**"
+      - "schemas/**"
+      - "workloads/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate result JSON files
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in data/results/*.json; do
+            [ -e "$file" ] || continue
+            python -m arena validate "$file"
+          done
+      - name: Run framework tests
+        run: python -m unittest discover -s tests -v
+

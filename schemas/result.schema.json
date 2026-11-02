@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sandbox-arena.dev/schemas/result.schema.json",
+  "title": "Sandbox Arena Result",
+  "type": "object",
+  "required": ["schema_version", "result_id", "provider", "workload", "run", "environment", "measurements", "provenance"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "result_id": {"type": "string", "minLength": 1},
+    "provider": {"type": "object", "required": ["id"], "properties": {"id": {"type": "string"}, "adapter_version": {"type": "string"}}},
+    "workload": {"type": "object", "required": ["id", "version"], "properties": {"id": {"type": "string"}, "version": {"type": "string"}, "title": {"type": "string"}}},
+    "run": {"type": "object", "required": ["mode", "region"], "properties": {"mode": {"enum": ["cold", "warm", "resume"]}, "region": {"type": "string"}, "repetitions": {"type": "integer", "minimum": 1}, "started_at": {"type": "string"}}},
+    "environment": {"type": "object"},
+    "measurements": {"type": "object", "required": ["status", "total_duration_ms"], "properties": {"status": {"enum": ["success", "failure", "partial"]}, "total_duration_ms": {"type": "number", "minimum": 0}, "success_rate": {"type": "number", "minimum": 0, "maximum": 1}, "repetitions": {"type": "array"}}},
+    "provenance": {"type": "object", "required": ["source"], "properties": {"source": {"enum": ["self-run", "community-run", "vendor-reported", "official-claim"]}, "runner": {"type": "string"}, "raw_trace_included": {"type": "boolean"}}}
+  }
+}
+
