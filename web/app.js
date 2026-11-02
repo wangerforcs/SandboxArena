@@ -54,6 +54,31 @@ function renderTable(records) {
   `).join("");
 }
 
+function renderCatalog(catalog) {
+  const container = $("#provider-catalog");
+  if (!catalog.length) {
+    container.innerHTML = '<p class="empty-state">No providers have been added to the catalog yet.</p>';
+    return;
+  }
+  container.innerHTML = catalog.map((provider, index) => `
+    <article class="provider-card">
+      <div class="provider-card-top">
+        <div><span class="provider-index">${String(index + 1).padStart(2, "0")}</span><h3>${provider.name}</h3></div>
+        <a href="${provider.source_url}" target="_blank" rel="noreferrer" aria-label="Open ${provider.name} source">↗</a>
+      </div>
+      <p class="provider-category">${provider.category}</p>
+      <dl>
+        <div><dt>Model</dt><dd>${provider.model}</dd></div>
+        <div><dt>Isolation</dt><dd>${provider.isolation}</dd></div>
+        <div><dt>Lifecycle</dt><dd>${provider.lifecycle}</dd></div>
+        <div><dt>Vendor-reported claim</dt><dd>${provider.startup_claim || "Not published"}</dd></div>
+      </dl>
+      <div class="provider-claims"><span>Published capabilities</span><ul>${provider.official_claims.map((claim) => `<li>${claim}</li>`).join("")}</ul></div>
+      <div class="provider-card-footer"><a href="${provider.docs_url}" target="_blank" rel="noreferrer">Docs ↗</a><span>Checked ${provider.last_checked}</span></div>
+    </article>
+  `).join("");
+}
+
 function boot(data) {
   const hostParts = window.location.hostname.split(".");
   const pathParts = window.location.pathname.split("/").filter(Boolean);
@@ -63,6 +88,7 @@ function boot(data) {
   }
   renderStats(data);
   renderFilters(data);
+  renderCatalog(data.catalog || []);
   const update = () => {
     const workload = $("#workload-filter").value;
     const source = $("#source-filter").value;

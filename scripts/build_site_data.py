@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+CATALOG_PATH = ROOT / "data" / "catalog" / "providers.json"
 sys.path.insert(0, str(ROOT))
 
 from arena.schema import load_json, validate_result  # noqa: E402
@@ -67,7 +68,7 @@ def summarize_result(result: dict[str, Any], filename: str) -> dict[str, Any]:
     }
 
 
-def build(results_dir: Path) -> dict[str, Any]:
+def build(results_dir: Path, catalog_path: Path = CATALOG_PATH) -> dict[str, Any]:
     records = []
     errors = []
     for path in sorted(results_dir.glob("*.json")):
@@ -85,6 +86,10 @@ def build(results_dir: Path) -> dict[str, Any]:
         raise ValueError("invalid result files:\n" + "\n".join(errors))
 
     providers = sorted({record["provider"] for record in records})
+    catalog = []
+    if catalog_path.exists():
+        with catalog_path.open("r", encoding="utf-8") as handle:
+            catalog = json.load(handle)
     workloads = sorted({record["workload"] for record in records})
     source_counts: dict[str, int] = {}
     for record in records:
@@ -96,11 +101,13 @@ def build(results_dir: Path) -> dict[str, Any]:
         "summary": {
             "result_count": len(records),
             "provider_count": len(providers),
+            "tracked_provider_count": len(catalog),
             "workload_count": len(workloads),
             "success_rate": round(statistics.fmean(record["success_rate"] for record in records), 4) if records else None,
             "sources": source_counts,
         },
         "providers": providers,
+        "catalog": catalog,
         "workloads": workloads,
         "records": records,
     }

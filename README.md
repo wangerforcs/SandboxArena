@@ -32,6 +32,7 @@ arena/                         CLI, result validation, and provider interfaces
 workloads/                     Versioned workload definitions
 schemas/                       Public JSON schemas
 data/results/                  Reviewed benchmark results
+data/catalog/                  Provider facts and links from public sources
 scripts/                       Build scripts for the website
 web/                           Static website
 tests/                         Local tests
@@ -74,6 +75,8 @@ Every result must include a `provenance.source` value:
 - `official-claim`: taken from official product material and not independently verified.
 
 The website keeps these sources separate. They should not be presented as equivalent evidence.
+
+The initial provider catalog lives in [`data/catalog/providers.json`](data/catalog/providers.json). It records public product information and links; fields such as task duration, p95 latency, success rate, and cost are only filled from benchmark results.
 
 ## GitHub Pages
 

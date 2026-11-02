@@ -1,0 +1,129 @@
+[
+  {
+    "id": "e2b",
+    "name": "E2B",
+    "category": "General-purpose sandbox",
+    "model": "Hosted microVM sandbox platform",
+    "isolation": "Firecracker microVM",
+    "lifecycle": "Ephemeral sandbox sessions; pause and persistence depend on the selected product path",
+    "official_claims": [
+      "One microVM per sandbox with its own kernel",
+      "JavaScript and Python SDKs",
+      "Managed cloud, BYOC, and open-source platform components"
+    ],
+    "startup_claim": null,
+    "state_claim": "Product and runtime support persistence options; not scored here",
+    "docs_url": "https://e2b.dev/docs",
+    "source_url": "https://e2b.dev/open-source",
+    "last_checked": "2026-11-02"
+  },
+  {
+    "id": "daytona",
+    "name": "Daytona",
+    "category": "Composable development sandbox",
+    "model": "Managed sandbox platform",
+    "isolation": "Firecracker microVM for the default Linux sandbox",
+    "lifecycle": "Images, snapshots, volumes, long-running processes, and regional sandboxes",
+    "official_claims": [
+      "Python and TypeScript SDKs",
+      "Code, process, filesystem, Git, PTY, SSH, and computer-use APIs",
+      "GPU virtual machines and snapshot-based environments"
+    ],
+    "startup_claim": "Sub-second creation is documented for sandboxes resumed from optimized snapshots",
+    "state_claim": "Snapshots can capture memory and disk for later resume",
+    "docs_url": "https://www.daytona.com/docs",
+    "source_url": "https://www.daytona.io/docs/en/v2/architecture/",
+    "last_checked": "2026-11-02"
+  },
+  {
+    "id": "blaxel",
+    "name": "Blaxel",
+    "category": "Persistent agent runtime",
+    "model": "Stateful microVM sandbox",
+    "isolation": "One hardware-isolated microVM per agent, app, or job",
+    "lifecycle": "Persistent filesystem and memory snapshots with automatic idle suspension",
+    "official_claims": [
+      "The vendor reports fresh sandboxes boot in milliseconds",
+      "The vendor reports about 25 ms resume from standby with memory and filesystem intact",
+      "Scale to 100,000+ concurrent sandboxes is advertised"
+    ],
+    "startup_claim": "Vendor-reported: milliseconds for fresh boot; about 25 ms for resume (not independently verified)",
+    "state_claim": "Filesystem and memory survive suspension through snapshots",
+    "docs_url": "https://blaxel.ai/docs",
+    "source_url": "https://blaxel.ai/platform/sandboxes",
+    "last_checked": "2026-11-02"
+  },
+  {
+    "id": "modal",
+    "name": "Modal Sandboxes",
+    "category": "Elastic compute sandbox",
+    "model": "On-demand sandbox runtime",
+    "isolation": "gVisor or VM runtime, selected per workload",
+    "lifecycle": "Disposable sandboxes with volumes, images, snapshots, idle timeouts, and readiness probes",
+    "official_claims": [
+      "CPU and GPU sandboxes",
+      "Filesystem snapshots for large custom images",
+      "Secure networking, secrets, and readiness probes"
+    ],
+    "startup_claim": "Sub-second starts on custom images are advertised",
+    "state_claim": "Filesystem snapshots preserve state; runtime and snapshot limits apply",
+    "docs_url": "https://modal.com/docs/guide/sandboxes",
+    "source_url": "https://modal.com/products/sandboxes",
+    "last_checked": "2026-11-02"
+  },
+  {
+    "id": "vercel-sandbox",
+    "name": "Vercel Sandbox",
+    "category": "Ephemeral code execution",
+    "model": "Managed sandbox primitive",
+    "isolation": "Firecracker microVM with a dedicated kernel",
+    "lifecycle": "Ephemeral sandboxes with filesystem snapshots and network policies",
+    "official_claims": [
+      "Node.js and Python runtimes",
+      "SDK and CLI access",
+      "Snapshot a running sandbox and resume later"
+    ],
+    "startup_claim": "Startup in milliseconds is advertised",
+    "state_claim": "Filesystem snapshots can avoid repeating setup work",
+    "docs_url": "https://vercel.com/docs/sandbox",
+    "source_url": "https://vercel.com/docs/sandbox",
+    "last_checked": "2026-11-02"
+  },
+  {
+    "id": "cloudflare-sandboxes",
+    "name": "Cloudflare Sandboxes",
+    "category": "Worker-integrated sandbox",
+    "model": "Sandbox containers managed through Workers",
+    "isolation": "Isolated sandbox container; exact runtime boundary depends on the product path",
+    "lifecycle": "Worker-controlled sessions with sleep, storage, networking, and preview integrations",
+    "official_claims": [
+      "Run agent-written code, uploaded applications, builds, and data analysis",
+      "Worker decides which application APIs and data are exposed",
+      "Outbound network access can be controlled by the Worker"
+    ],
+    "startup_claim": null,
+    "state_claim": "The SDK documents backup and restore for coding sessions",
+    "docs_url": "https://developers.cloudflare.com/sandbox/",
+    "source_url": "https://developers.cloudflare.com/changelog/post/2026-04-13-containers-sandbox-ga/",
+    "last_checked": "2026-11-02"
+  },
+  {
+    "id": "fly-sprites",
+    "name": "Fly.io Sprites",
+    "category": "Persistent agent computer",
+    "model": "Persistent Linux computer for agents",
+    "isolation": "Firecracker microVM with its own kernel",
+    "lifecycle": "Durable filesystem, idle sleep, warm wake, checkpoints, restore, and connectors",
+    "official_claims": [
+      "Persistent 100 GB filesystem and automatic checkpointing",
+      "Services wake through a Sprite URL",
+      "Connectors keep external credentials outside the Sprite"
+    ],
+    "startup_claim": "Wake in under a second is advertised",
+    "state_claim": "Filesystem survives sleep; checkpoints capture the writable environment",
+    "docs_url": "https://fly.io/sprites/",
+    "source_url": "https://fly.io/learn/agent-sandbox-providers/",
+    "last_checked": "2026-11-02"
+  }
+]
+

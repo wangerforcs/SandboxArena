@@ -8,6 +8,7 @@ on:
     paths:
       - "web/**"
       - "data/results/**"
+      - "data/catalog/**"
       - "scripts/**"
       - "arena/**"
       - "workloads/**"
